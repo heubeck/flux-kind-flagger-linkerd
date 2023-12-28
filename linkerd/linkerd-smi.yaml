@@ -6,14 +6,17 @@ metadata:
   namespace: linkerd-smi
 spec:
   interval: 30m
+  dependsOn:
+    - name: linkerd-crds
+      namespace: linkerd
   chart:
     spec:
       chart: linkerd-smi
       version: "*"
       sourceRef:
         kind: HelmRepository
-        name: linkerd-charts
-        namespace: linkerd
+        name: linkerd-smi-charts
+        namespace: linkerd-smi
   install:
     crds: CreateReplace
   upgrade:

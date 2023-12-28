@@ -8,6 +8,8 @@ spec:
   interval: 30m
   dependsOn:
     - name: linkerd-crds
+    - name: linkerd-smi
+      namespace: linkerd-smi
   chart:
     spec:
       chart: linkerd-control-plane
