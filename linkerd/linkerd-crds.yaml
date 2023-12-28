@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: linkerd-crds
-      version: "~1"
+      version: "*"
       sourceRef:
         kind: HelmRepository
         name: linkerd-charts

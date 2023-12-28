@@ -1,0 +1,101 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: prometheus-community
+  namespace: monitoring
+spec:
+  interval: 15m
+  url: https://prometheus-community.github.io/helm-charts
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: prometheus-operator
+  namespace: monitoring
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: kube-prometheus-stack
+      version: "*"
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: monitoring
+  install:
+    crds: Create
+  upgrade:
+    crds: CreateReplace
+  values:
+    coreDns:
+      enabled: false
+    kubeDns:
+      enabled: false
+    defaultRules:
+      rules:
+        etcd: false
+        kubeScheduler: false
+        time: false
+        kubernetesResources: true
+        kubelet: true
+        kubeProxy: false
+    kubeControllerManager:
+      enabled: false
+    kubeEtcd:
+      enabled: false
+    kubeScheduler:
+      enabled: false
+    kubeProxy:
+      enabled: false
+    kubelet:
+      enabled: true
+    prometheus:
+      prometheusSpec:
+        externalUrl: "http://localhost:8080/prometheus/"
+        routePrefix: /prometheus/
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelectorNilUsesHelmValues: false
+        ruleSelectorNilUsesHelmValues: false
+    alertmanager:
+      enabled: false
+    grafana:
+      enabled: true
+      grafana.ini:
+        auth.anonymous:
+          enabled: true
+          org_role: Admin
+        server:
+          root_url: "http://localhost:8080/grafana/"
+          serve_from_sub_path: true
+        security:
+          allow_embedding: true
+          cookie_samesite: none
+      serviceMonitor:
+        path: "/grafana/metrics"
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: monitoring-ingress
+  namespace: monitoring
+spec:
+  rules:
+    - http:
+        paths:
+          - backend:
+              service:
+                name: prometheus-operator-grafana
+                port:
+                  number: 80
+            path: /grafana
+            pathType: Prefix
+    - http:
+        paths:
+          - backend:
+              service:
+                name: prometheus-operated
+                port:
+                  number: 9090
+            path: /prometheus
+            pathType: Prefix

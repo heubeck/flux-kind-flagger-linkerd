@@ -18,7 +18,7 @@ spec:
   chart:
     spec:
       chart: kubernetes-dashboard
-      version: ${kubernetes_dashboard_version}
+      version: "*"
       sourceRef:
         kind: HelmRepository
         name: kubernetes-dashboard
