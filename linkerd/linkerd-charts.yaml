@@ -1,0 +1,10 @@
+---
+# https://github.com/linkerd/linkerd2/tree/main/charts
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: linkerd-charts
+  namespace: linkerd
+spec:
+  interval: 120m
+  url: https://helm.linkerd.io/stable

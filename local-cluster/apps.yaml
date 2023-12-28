@@ -8,6 +8,7 @@ spec:
   interval: 30s
   dependsOn:
     - name: infrastructure
+    - name: linkerd
   sourceRef:
     kind: GitRepository
     name: flux-system
