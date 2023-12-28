@@ -1,4 +1,4 @@
-# Flux-Kind-Starter
+# Flux-Kind-Starter for Canary Deployment experiments using Istio
 
 A local Kubernetes setup using [Kind](https://kind.sigs.k8s.io/) and [Flux](https://fluxcd.io/) as template for your (and mine) experiments.
 
@@ -42,7 +42,7 @@ The included `Makefile` supports the following tasks:
 * Kind [config](.kind/config.yaml) binding to host ports 8080 and 8443, so please free up those ports or change the config
 * Basic GitOps setup with [nginx-ingress](https://github.com/kubernetes/ingress-nginx/tree/main/charts/ingress-nginx) listing to those ports and
 * [kubernetes-dashboard](https://github.com/kubernetes/dashboard/tree/master/charts/helm-chart/kubernetes-dashboard) accessible at http://localhost:8080/dashboard/
-* An empty [apps](apps) folder targeted by a respective [kustomization](local-cluster/apps.yaml), ready to take your experiments
+* An [apps](apps) folder targeted by a respective [kustomization](local-cluster/apps.yaml), with an example application that gets deployed in a canary way.
 
 ## Local requirements
 
