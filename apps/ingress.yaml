@@ -6,12 +6,14 @@ metadata:
   namespace: apps
   annotations:
     nginx.ingress.kubernetes.io/service-upstream: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
   - http:
       paths:
       - pathType: Prefix
-        path: /echo
+        path: /echo/(.*)
         backend:
           service:
             name: examiner
