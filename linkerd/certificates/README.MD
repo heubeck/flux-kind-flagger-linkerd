@@ -63,14 +63,24 @@ step certificate create linkerd-sp-validator.linkerd.svc sp.crt sp.key --kty=RSA
 kubectl create secret tls -n linkerd linkerd-sp-validator-k8s-tls --cert=sp.crt --key=sp.key -o yaml --dry-run=client > linkerd-sp-validator-k8s-tls.yaml
 ```
 
-### Tracing extension
+### Viz extension
 
 ```shell
-# Jaeger injector certificate and key
-step certificate create jaeger-injector.linkerd-jaeger.svc tracing.crt tracing.key --kty=RSA --profile leaf --not-after 876000h --no-password --insecure --ca ca.crt --ca-key ca.key
+# Tap injector certificate and key
+step certificate create tap-injector.linkerd-viz.svc tap-injector.crt tap-injector.key --kty=RSA --profile leaf --not-after 876000h --no-password --insecure --ca ca.crt --ca-key ca.key
 ```
 
 ```shell
-# create tls Secret holding the jaeger certificate
-kubectl create secret tls -n linkerd-tracing jaeger-injector-k8s-tls --cert=tracing.crt --key=tracing.key -o yaml --dry-run=client > jaeger-injector-k8s-tls.yaml
+# create tls Secret holding the tap injector certificate
+kubectl create secret tls -n linkerd-viz tap-injector-k8s-tls --cert=tap-injector.crt --key=tap-injector.key -o yaml --dry-run=client > tap-injector-k8s-tls.yaml
+```
+
+```shell
+# Tap certificate and key
+step certificate create tap.linkerd-viz.svc tap.crt tap.key --kty=RSA --profile leaf --not-after 876000h --no-password --insecure --ca ca.crt --ca-key ca.key
+```
+
+```shell
+# create tls Secret holding the tap certificate
+kubectl create secret tls -n linkerd-viz tap-k8s-tls --cert=tap.crt --key=tap.key -o yaml --dry-run=client > tap-k8s-tls.yaml
 ```
