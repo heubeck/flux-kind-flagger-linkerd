@@ -2,9 +2,9 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: dashboard
+  name: ingress
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: monitoring
+  name: flagger

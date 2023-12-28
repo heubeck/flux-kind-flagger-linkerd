@@ -6,5 +6,6 @@ resources:
   - certificates
   - linkerd-charts.yaml
   - linkerd-crds.yaml
+  - linkerd-cni.yaml
   - linkerd-control-plane.yaml
   - linkerd-viz.yaml

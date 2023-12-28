@@ -8,6 +8,7 @@ spec:
   interval: 30m
   dependsOn:
     - name: linkerd-crds
+    - name: linkerd-cni
   chart:
     spec:
       chart: linkerd-control-plane
@@ -17,6 +18,7 @@ spec:
         name: linkerd-charts
         namespace: linkerd
   values:
+    cniEnabled: true
     identity:
       # use CA certs from given configmap
       externalCA: true

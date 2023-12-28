@@ -42,6 +42,8 @@ spec:
         type: NodePort
         targetPorts:
           http: http
+      podAnnotations:
+        linkerd.io/inject: enabled
       nodeSelector:
         ingress-ready: "true"
       tolerations:
