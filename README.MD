@@ -1,4 +1,4 @@
-# Flux-Kind-Starter for Canary Deployment experiments using Istio
+# Flux-Kind-Starter for Canary Deployment experiments using Linkerd
 
 A local Kubernetes setup using [Kind](https://kind.sigs.k8s.io/) and [Flux](https://fluxcd.io/) as template for your (and mine) experiments.
 

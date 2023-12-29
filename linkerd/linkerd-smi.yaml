@@ -9,6 +9,8 @@ spec:
   dependsOn:
     - name: linkerd-crds
       namespace: linkerd
+    - name: linkerd-control-plane
+      namespace: linkerd
   chart:
     spec:
       chart: linkerd-smi
