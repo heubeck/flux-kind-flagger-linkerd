@@ -18,13 +18,13 @@ arch = $(shell [[ "$$(uname -m)" = x86_64 ]] && echo "amd64" || echo "$$(uname -
 ### versions
 
 # https://kubernetes.io/releases/
-kubectl_version = v1.29.0
+kubectl_version = v1.29.2
 # https://github.com/kubernetes-sigs/kind/releases
-kind_version = v0.20.0
+kind_version = v0.22.0
 # https://github.com/fluxcd/flux2/releases
-flux_version = v2.2.2
+flux_version = v2.2.3
 # https://hub.docker.com/r/kindest/node/tags
-kindest_node_version = v1.29.0
+kindest_node_version = v1.29.2
 
 ###
 
@@ -41,7 +41,7 @@ kindest_node_image = kindest/node:$(kindest_node_version)
 
 ### leave empty for enforcing docker even if podman was available, or set env NO_PODMAN=1
 # kind_podman =
-kind_podman = $(shell [[ "$$NO_PODMAN" -ne 1 ]] && which podman > /dev/null && echo "KIND_EXPERIMENTAL_PROVIDER=podman" || echo "")
+kind_podman = $(shell [[ "$$NO_PODMAN" -ne 1 ]] && podman ps > /dev/null && echo "KIND_EXPERIMENTAL_PROVIDER=podman" || echo "")
 
 kind_cmd = $(kind_podman) $(kind_location)
 
