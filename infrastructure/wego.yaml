@@ -18,6 +18,7 @@ spec:
   chart:
     spec:
       chart: weave-gitops
+      version: "*"
       sourceRef:
         kind: HelmRepository
         name: weave-charts

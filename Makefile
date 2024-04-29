@@ -18,7 +18,7 @@ arch = $(shell [[ "$$(uname -m)" = x86_64 ]] && echo "amd64" || echo "$$(uname -
 ### versions
 
 # https://kubernetes.io/releases/
-kubectl_version = v1.29.2
+kubectl_version = v1.30.0
 # https://github.com/kubernetes-sigs/kind/releases
 kind_version = v0.22.0
 # https://github.com/fluxcd/flux2/releases
